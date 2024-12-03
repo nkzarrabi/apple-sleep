@@ -1,13 +1,13 @@
-import xml.etree.ElementTree as ET
 import pandas as pd
 import csv
 from typing import Generator, Tuple
+import defusedxml.ElementTree
 
 
 
 def gen_records(file_name: str, record_type: str):
     """Generate elements of the specified type from the XML file."""
-    for event, elmt in ET.iterparse(file_name, events=('start',)):
+    for event, elmt in defusedxml.ElementTree.iterparse(file_name, events=('start',)):
         if elmt.tag == 'Record' and elmt.attrib.get('type') == record_type:
             yield elmt.attrib
         elmt.clear()  # Free memory

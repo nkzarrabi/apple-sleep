@@ -1,11 +1,11 @@
-import xml.etree.ElementTree as ET
 import pandas as pd
 import matplotlib.pyplot as plt
+import defusedxml.ElementTree
 
 # Parse the XML file and extract sleep data
 def parse_sleep_data(file_name):
     """Parse sleep data from Apple Health XML export."""
-    tree = ET.parse(file_name)
+    tree = defusedxml.ElementTree.parse(file_name)
     root = tree.getroot()
 
     sleep_data = []
